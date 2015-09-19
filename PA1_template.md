@@ -6,7 +6,8 @@ Peer Activity 1 Markdown File
 - Convert the date into a the appropriate date format
 - Finally, filter out the missing values and creating a new dataset without the "NA"s, which will be used in the first few steps of the analysis (until the part where missing values are imputed)
 
-```{r load_data, echo=TRUE}
+
+```r
 setwd("C:/Users/dama/Desktop/r_class/")
 raw_data <- read.csv("class_four_data/activity.csv", stringsAsFactors = TRUE,
         row.names = NULL,
@@ -14,7 +15,6 @@ raw_data <- read.csv("class_four_data/activity.csv", stringsAsFactors = TRUE,
         col.names = c("steps", "date", "interval"))
 raw_data$date <- as.Date(raw_data$date, format = "%Y-%m-%d") 
 data <- raw_data[!is.na(raw_data$steps),]
-
 ```
 
         
@@ -29,10 +29,21 @@ Now, perform the following tasks:
 
 Note: The first two "options" are due to the mean number showing up as an exponential (fixed by scipen) and with too many decimals (dixed by digits)
 
-```{r mean_steps_day, echo = TRUE}
+
+```r
 total_steps <- aggregate(data$steps, by=list(data$date), FUN = "sum")
 hist(total_steps$x, col="red", xlab = "Total Steps Per Day", main = "Total Steps Per Day")
+```
+
+![plot of chunk mean_steps_day](figure/mean_steps_day-1.png) 
+
+```r
 summary(total_steps$x)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##      41    8841   10760   10770   13290   21190
 ```
 
 As seen in the summary table above, the mean total steps per day is 10770 and the median total steps per day is 10760. 
@@ -46,15 +57,21 @@ Two different taks:
 - Find the row in the data frame that is associated with the maximum average number of steps (which is the second column)
 - Once the row is identified, look at the value in the first column of that row, which is the interval with the maximum average
 
-```{r daily_pattern, echo = TRUE}
+
+```r
 average_steps <- aggregate(data$steps, by=list(data$interval), FUN = "mean")
 plot(average_steps$x, type = "l", ylab = "Average steps per interval", xlab = "Five minute intervals")
+```
+
+![plot of chunk daily_pattern](figure/daily_pattern-1.png) 
+
+```r
 max_average <- max(average_steps$x)
 row_with_max_average <- which.max(average_steps[,2])
 interval_max <- average_steps[row_with_max_average, 1]
 ```
 
-The maximum number of steps on average across all intervals is `r max_average` and the 5-minute interval that contains this maximum number of steps is `r interval_max`
+The maximum number of steps on average across all intervals is 206.1698113 and the 5-minute interval that contains this maximum number of steps is 835
 
 ## Imputing missing values
 The process for imputing missing values is as follows:
@@ -64,7 +81,8 @@ The process for imputing missing values is as follows:
 4. Plot the histogram
 5. Calculate the mean and median total steps per day (as above) and show the result.
 
-```{r imputing, echo=TRUE}
+
+```r
 names(average_steps)[names(average_steps)=="Group.1"] <- "interval"
 names(average_steps)[names(average_steps)=="x"] <- "interval_mean"
 
@@ -75,15 +93,25 @@ impute_data <- subset(impute_data, select=c(interval, date, steps))
 
 total_steps_impute <- aggregate(impute_data$steps, by=list(impute_data$date), FUN = "sum")
 hist(total_steps_impute$x, col="red", xlab = "Total Steps Per Day (with missing values imputed)", main = "Total Steps Per Day (with missing values imputed)")
+```
 
+![plot of chunk imputing](figure/imputing-1.png) 
+
+```r
 summary(total_steps_impute$x)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##      41    9819   10770   10770   12810   21190
 ```
 
 After missing values are imputed by assigning them the average number of steps in their 5-minute interval mean total steps per day remains at 10770, while the median total steps per day becomes 10770. A slight increase in the median, but no change in the mean. This is not surprising, since the missing values occur in certain days (as opposed to some intervals in some days having missing values, perhaps in a random fashion) and hence are evenly distributed across intervals within a day.
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
-``` {r weekends, echo=TRUE}
+
+```r
 library(lattice)
 impute_data$day_of_week <- weekdays(impute_data$date)
 impute_data$type_day <- "Weekday"
@@ -94,4 +122,6 @@ type_day_average_steps <- aggregate(impute_data$steps, by=list(impute_data$inter
 
 xyplot(type_day_average_steps$x ~ type_day_average_steps$Group.1 | type_day_average_steps$Group.2, t= "l", xlab = "Five minute intervals", ylab = "Average steps per 5-minute interval", layout = c(1,2)) 
 ```
+
+![plot of chunk weekends](figure/weekends-1.png) 
 
