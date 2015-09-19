@@ -27,8 +27,6 @@ Now, perform the following tasks:
 2. Plot a histogram of the total number of steps taken per day  
 3. Summarize the total number of steps taken per day, in order to report the mean and median
 
-Note: The first two "options" are due to the mean number showing up as an exponential (fixed by scipen) and with too many decimals (dixed by digits)
-
 
 ```r
 total_steps <- aggregate(data$steps, by=list(data$date), FUN = "sum")

@@ -232,8 +232,6 @@ data &lt;- raw_data[!is.na(raw_data$steps),]
 <li>Summarize the total number of steps taken per day, in order to report the mean and median</li>
 </ol>
 
-<p>Note: The first two &quot;options&rdquo; are due to the mean number showing up as an exponential (fixed by scipen) and with too many decimals (dixed by digits)</p>
-
 <pre><code class="r">total_steps &lt;- aggregate(data$steps, by=list(data$date), FUN = &quot;sum&quot;)
 hist(total_steps$x, col=&quot;red&quot;, xlab = &quot;Total Steps Per Day&quot;, main = &quot;Total Steps Per Day&quot;)
 </code></pre>
@@ -279,7 +277,7 @@ interval_max &lt;- average_steps[row_with_max_average, 1]
 <p>The process for imputing missing values is as follows:<br/>
 1. Calculate the mean number of steps for each 5-minute interval and create a data frame (already done). Rename the variables to make merging easier<br/>
 2. Merge this with the original dataset, which contains the missing value<br/>
-3. For each missing value, assign the mean of the 5-minute interval that the missing value is in. This is done by replacing the missing values in the &ldquo;steps&rdquo; column with the interval mean. This is achieved by using a combination of within() and is.na(). Then subset the resulting data frame to create a &ldquo;new dataset that is equal to the original dataset but with the missing data filled in&rdquo; (as defined in the assignment). This simply involves removing the &ldquo;interval mean&rdquo; column<br/>
+3. For each missing value, assign the mean of the 5-minute interval that the missing value is in. This is done by replacing the missing values in the &quot;steps&rdquo; column with the interval mean. This is achieved by using a combination of within() and is.na(). Then subset the resulting data frame to create a &ldquo;new dataset that is equal to the original dataset but with the missing data filled in&rdquo; (as defined in the assignment). This simply involves removing the &ldquo;interval mean&rdquo; column<br/>
 4. Plot the histogram<br/>
 5. Calculate the mean and median total steps per day (as above) and show the result.</p>
 
