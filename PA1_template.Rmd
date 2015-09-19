@@ -21,10 +21,10 @@ data <- raw_data[!is.na(raw_data$steps),]
 The data has been loaded and the date has been converted to date format. 
 
 ## What is the mean total number of steps taken per day?
-Now, perform the following tasks:
+Now, perform the following tasks:  
 
-1. Calculate the total number of steps taken per day
-2. Plot a histogram of the total number of steps taken per day
+1. Calculate the total number of steps taken per day  
+2. Plot a histogram of the total number of steps taken per day  
 3. Summarize the total number of steps taken per day, in order to report the mean and median
 
 Note: The first two "options" are due to the mean number showing up as an exponential (fixed by scipen) and with too many decimals (dixed by digits)
@@ -40,7 +40,8 @@ As seen in the summary table above, the mean total steps per day is 10770 and th
 ## What is the daily activity pattern?
 Two different taks:
 
-1. Calculate the average number of steps per interval (0, 5, etc.). This will show on average how many steps are taken in each interval across all of the observation days (61). Then plot this average, where interval is on the x-axis and the average number of steps is on the y-axis
+1. Calculate the average number of steps per interval (0, 5, etc.). This will show on average how many steps are taken in each interval across all of the observation days (61). Then plot this average, where interval is on the x-axis and the average number of steps is on the y-axis  
+
 2. Then summarize the average steps, find the maximum number and identify which interval is associated with the max. Then display that interval. This is done in the following way:
 - Find the maximum average number of steps
 - Find the row in the data frame that is associated with the maximum average number of steps (which is the second column)
@@ -57,11 +58,11 @@ interval_max <- average_steps[row_with_max_average, 1]
 The maximum number of steps on average across all intervals is `r max_average` and the 5-minute interval that contains this maximum number of steps is `r interval_max`
 
 ## Imputing missing values
-The process for imputing missing values is as follows:
-1. Calculate the mean number of steps for each 5-minute interval and create a data frame (already done). Rename the variables to make merging easier
-2. Merge this with the original dataset, which contains the missing values
-3. For each missing value, assign the mean of the 5-minute interval that the missing value is in. This is done by replacing the missing values in the "steps" column with the interval mean. This is achieved by using a combination of within() and is.na(). Then subset the resulting data frame to create a "new dataset that is equal to the original dataset but with the missing data filled in" (as defined in the assignment). This simply involves removing the "interval mean" column
-4. Plot the histogram
+The process for imputing missing values is as follows:  
+1. Calculate the mean number of steps for each 5-minute interval and create a data frame (already done). Rename the variables to make merging easier  
+2. Merge this with the original dataset, which contains the missing value  
+3. For each missing value, assign the mean of the 5-minute interval that the missing value is in. This is done by replacing the missing values in the "steps" column with the interval mean. This is achieved by using a combination of within() and is.na(). Then subset the resulting data frame to create a "new dataset that is equal to the original dataset but with the missing data filled in" (as defined in the assignment). This simply involves removing the "interval mean" column  
+4. Plot the histogram  
 5. Calculate the mean and median total steps per day (as above) and show the result.
 
 ```{r imputing, echo=TRUE}

@@ -224,11 +224,11 @@ data &lt;- raw_data[!is.na(raw_data$steps),]
 
 <h2>What is the mean total number of steps taken per day?</h2>
 
-<p>Now, perform the following tasks:</p>
+<p>Now, perform the following tasks:  </p>
 
 <ol>
-<li>Calculate the total number of steps taken per day</li>
-<li>Plot a histogram of the total number of steps taken per day</li>
+<li>Calculate the total number of steps taken per day<br/></li>
+<li>Plot a histogram of the total number of steps taken per day<br/></li>
 <li>Summarize the total number of steps taken per day, in order to report the mean and median</li>
 </ol>
 
@@ -254,11 +254,11 @@ hist(total_steps$x, col=&quot;red&quot;, xlab = &quot;Total Steps Per Day&quot;,
 <p>Two different taks:</p>
 
 <ol>
-<li>Calculate the average number of steps per interval (0, 5, etc.). This will show on average how many steps are taken in each interval across all of the observation days (61). Then plot this average, where interval is on the x-axis and the average number of steps is on the y-axis</li>
-<li>Then summarize the average steps, find the maximum number and identify which interval is associated with the max. Then display that interval. This is done in the following way:</li>
-<li>Find the maximum average number of steps</li>
-<li>Find the row in the data frame that is associated with the maximum average number of steps (which is the second column)</li>
-<li>Once the row is identified, look at the value in the first column of that row, which is the interval with the maximum average</li>
+<li><p>Calculate the average number of steps per interval (0, 5, etc.). This will show on average how many steps are taken in each interval across all of the observation days (61). Then plot this average, where interval is on the x-axis and the average number of steps is on the y-axis  </p></li>
+<li><p>Then summarize the average steps, find the maximum number and identify which interval is associated with the max. Then display that interval. This is done in the following way:</p></li>
+<li><p>Find the maximum average number of steps</p></li>
+<li><p>Find the row in the data frame that is associated with the maximum average number of steps (which is the second column)</p></li>
+<li><p>Once the row is identified, look at the value in the first column of that row, which is the interval with the maximum average</p></li>
 </ol>
 
 <pre><code class="r">average_steps &lt;- aggregate(data$steps, by=list(data$interval), FUN = &quot;mean&quot;)
@@ -276,11 +276,11 @@ interval_max &lt;- average_steps[row_with_max_average, 1]
 
 <h2>Imputing missing values</h2>
 
-<p>The process for imputing missing values is as follows:
-1. Calculate the mean number of steps for each 5-minute interval and create a data frame (already done). Rename the variables to make merging easier
-2. Merge this with the original dataset, which contains the missing values
-3. For each missing value, assign the mean of the 5-minute interval that the missing value is in. This is done by replacing the missing values in the &ldquo;steps&rdquo; column with the interval mean. This is achieved by using a combination of within() and is.na(). Then subset the resulting data frame to create a &ldquo;new dataset that is equal to the original dataset but with the missing data filled in&rdquo; (as defined in the assignment). This simply involves removing the &ldquo;interval mean&rdquo; column
-4. Plot the histogram
+<p>The process for imputing missing values is as follows:<br/>
+1. Calculate the mean number of steps for each 5-minute interval and create a data frame (already done). Rename the variables to make merging easier<br/>
+2. Merge this with the original dataset, which contains the missing value<br/>
+3. For each missing value, assign the mean of the 5-minute interval that the missing value is in. This is done by replacing the missing values in the &ldquo;steps&rdquo; column with the interval mean. This is achieved by using a combination of within() and is.na(). Then subset the resulting data frame to create a &ldquo;new dataset that is equal to the original dataset but with the missing data filled in&rdquo; (as defined in the assignment). This simply involves removing the &ldquo;interval mean&rdquo; column<br/>
+4. Plot the histogram<br/>
 5. Calculate the mean and median total steps per day (as above) and show the result.</p>
 
 <pre><code class="r">names(average_steps)[names(average_steps)==&quot;Group.1&quot;] &lt;- &quot;interval&quot;
